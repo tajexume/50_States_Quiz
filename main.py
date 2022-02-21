@@ -33,7 +33,12 @@ def creategame():
       states_X.pop(index)
       states_Y.pop(index)
       usa.pop(index)
-    while correct == 1:
+    elif answer_state.upper() == "QUIT":
+      missed_states = pandas.DataFrame(usa)
+      missed_states.to_csv("Missed_States.csv")
+      print(f'{missed_states}')
+      correct = 50
+    while correct == 50:
       reset = screen.textinput(title="You Won!", prompt="Play Again? Yes or No")
       if reset.upper() == "YES":
         screen.clearscreen()
