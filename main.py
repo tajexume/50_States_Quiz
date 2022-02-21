@@ -16,6 +16,7 @@ def creategame():
   x = []
   y = []
   answered = []
+  quit = False
   while correct != 50:
     answer_state = screen.textinput(title=f" {correct}/50", prompt="Enter a state")
     answer_state = answer_state.upper()
@@ -38,13 +39,22 @@ def creategame():
       missed_states.to_csv("Missed_States.csv")
       print(f'{missed_states}')
       correct = 50
+      quit = True
     while correct == 50:
-      reset = screen.textinput(title="You Won!", prompt="Play Again? Yes or No")
-      if reset.upper() == "YES":
-        screen.clearscreen()
-        creategame()
-      elif reset.upper() == "NO":
-        screen.bye()
+      if quit == False:
+        reset = screen.textinput(title="You Won!", prompt="Play Again? Yes or No")
+        if reset.upper() == "YES":
+          screen.clearscreen()
+          creategame()
+        elif reset.upper() == "NO":
+          screen.bye()
+      else:
+        reset = screen.textinput(title="You Lost!", prompt="Play Again? Yes or No")
+        if reset.upper() == "YES":
+          screen.clearscreen()
+          creategame()
+        elif reset.upper() == "NO":
+          screen.bye()
   screen.mainloop()
 creategame()
 
